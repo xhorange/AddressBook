@@ -10,7 +10,7 @@ public interface AddressbookMapper {
 
     int deleteByExample(AddressbookExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer ano);
 
     int insert(Addressbook record);
 
@@ -18,7 +18,7 @@ public interface AddressbookMapper {
 
     List<Addressbook> selectByExample(AddressbookExample example);
 
-    Addressbook selectByPrimaryKey(Integer id);
+    Addressbook selectByPrimaryKey(Integer ano);
 
     int updateByExampleSelective(@Param("record") Addressbook record, @Param("example") AddressbookExample example);
 

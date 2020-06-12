@@ -1,7 +1,7 @@
 package SpringMVC.Entity;
 
 public class Addressbook {
-    private Integer id;
+    private Integer ano;
 
     private String name;
 
@@ -9,14 +9,16 @@ public class Addressbook {
 
     private String email;
 
+    private String id;
+
     private String classification;
 
-    public Integer getId() {
-        return id;
+    public Integer getAno() {
+        return ano;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAno(Integer ano) {
+        this.ano = ano;
     }
 
     public String getName() {
@@ -41,6 +43,14 @@ public class Addressbook {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getClassification() {

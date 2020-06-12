@@ -60,7 +60,6 @@ function keyboard() {
         "    </div>")
 };
 function changeClasses() {
-    debugger
     var x=document.getElementById("classSelect").value;
     if(x=="个人"){
         $('#table1').bootstrapTable('refresh',{
@@ -77,6 +76,37 @@ function changeClasses() {
             url:"/changeBusiness"
         });
     }
+    $('#changeclass').modal('hide');
+};
+// 删除按钮事件
+$("#btn_delete").on("click", function() {
+    if (!confirm("是否确认删除？"))
+        return;
+    var rows = $("#table1").bootstrapTable('getSelections');// 获得要删除的数据
+    if (rows.length == 0) {// rows 主要是为了判断是否选中，下面的else内容才是主要
+        alert("请先选择要删除的记录!");
+        return;
+    } else {
+        var ids = new Array();// 声明一个数组
+        $(rows).each(function() {// 通过获得别选中的来进行遍历
+            ids.push(this.id);// cid为获得到的整条数据中的一列
+        });
+        deleteMs(ids);
+    }
+})
+function deleteMs(ids) {
+    $.ajax({
+        url : "/delete",
+        data : "ids=" + ids,
+        type : "post",
+        dataType : "json",
+        success : function(data) {
+            alert("ok");
+            $('#table1').bootstrapTable('refresh', {
+                url :"/findInitAddress"
+            });
+        }
+    });
 }
 
 

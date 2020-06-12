@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="SpringMVC.Dao.AddressbookMapper" >
   <resultMap id="BaseResultMap" type="SpringMVC.Entity.Addressbook" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
+    <id column="ano" property="ano" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="phonenumber" property="phonenumber" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
     <result column="classification" property="classification" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, name, phonenumber, email, classification
+    ano, name, phonenumber, email, ID, classification
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="SpringMVC.Entity.AddressbookExample" >
     select
@@ -88,11 +89,11 @@
     select 
     <include refid="Base_Column_List" />
     from addressbook
-    where ID = #{id,jdbcType=INTEGER}
+    where ano = #{ano,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from addressbook
-    where ID = #{id,jdbcType=INTEGER}
+    where ano = #{ano,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="SpringMVC.Entity.AddressbookExample" >
     delete from addressbook
@@ -101,16 +102,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="SpringMVC.Entity.Addressbook" >
-    insert into addressbook (ID, name, phonenumber, 
-      email, classification)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{classification,jdbcType=VARCHAR})
+    insert into addressbook (ano, name, phonenumber, 
+      email, ID, classification
+      )
+    values (#{ano,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{classification,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="SpringMVC.Entity.Addressbook" >
     insert into addressbook
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
+      <if test="ano != null" >
+        ano,
       </if>
       <if test="name != null" >
         name,
@@ -121,13 +124,16 @@
       <if test="email != null" >
         email,
       </if>
+      <if test="id != null" >
+        ID,
+      </if>
       <if test="classification != null" >
         classification,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+      <if test="ano != null" >
+        #{ano,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -137,6 +143,9 @@
       </if>
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="classification != null" >
         #{classification,jdbcType=VARCHAR},
@@ -152,8 +161,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update addressbook
     <set >
-      <if test="record.id != null" >
-        ID = #{record.id,jdbcType=INTEGER},
+      <if test="record.ano != null" >
+        ano = #{record.ano,jdbcType=INTEGER},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -163,6 +172,9 @@
       </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.classification != null" >
         classification = #{record.classification,jdbcType=VARCHAR},
@@ -174,10 +186,11 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update addressbook
-    set ID = #{record.id,jdbcType=INTEGER},
+    set ano = #{record.ano,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       phonenumber = #{record.phonenumber,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
+      ID = #{record.id,jdbcType=VARCHAR},
       classification = #{record.classification,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -195,18 +208,22 @@
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="id != null" >
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
       <if test="classification != null" >
         classification = #{classification,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=INTEGER}
+    where ano = #{ano,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="SpringMVC.Entity.Addressbook" >
     update addressbook
     set name = #{name,jdbcType=VARCHAR},
       phonenumber = #{phonenumber,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
+      ID = #{id,jdbcType=VARCHAR},
       classification = #{classification,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
+    where ano = #{ano,jdbcType=INTEGER}
   </update>
 </mapper>
